@@ -1,6 +1,11 @@
 # parts-of-speech
 Use a Bigram HMM to tag the parts of speech in a sentence
 
+## About Preprocessing
+There are two methods to handle unknown words:
+1. Replace them with an Unknown symbol
+2. Replace them with a pseudoword symbol
+
 ## Commands
 Use the following commands when inside src
 

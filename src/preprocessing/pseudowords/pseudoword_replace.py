@@ -2,15 +2,16 @@ from __future__ import annotations
 from collections import Counter
 from dataclasses import dataclass
 from itertools import chain
-from .base import BaseTransform
-
+from .pseudowords import match
+from ..base import BaseTransform
+    
 
 @dataclass
-class CountReplaceTransform(BaseTransform):
+class PseudoWordReplaceTransform(BaseTransform):
     threshold: int
-    special_token: str
+    unk_token: str
 
-    def fit(self, sequences: list[list[str]], *_) -> CountReplaceTransform:
+    def fit(self, sequences: list[list[str]], *_) -> PseudoWordReplaceTransform:
         frequency = Counter(chain(*sequences)) # Get the word counts
         self.words = { word: count for word, count in frequency.items() if count >= self.threshold }
         return self
@@ -19,7 +20,7 @@ class CountReplaceTransform(BaseTransform):
         
         return [
             [
-                (word if word in self.words else self.special_token)
+                (match(word, self.unk_token) if word not in self.words else word)
                 for word in sequence
             ] 
             for sequence in sequences

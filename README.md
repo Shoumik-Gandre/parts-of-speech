@@ -6,6 +6,8 @@ There are two methods to handle unknown words:
 1. Replace them with an Unknown symbol
 2. Replace them with a pseudoword symbol
 
+The following commands use method 2
+
 ## Commands
 Use the following commands when inside src
 
